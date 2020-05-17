@@ -34,14 +34,14 @@ files:
   text: |2
 
     import analyzer.Main;
-    import org.hyperskill.hstest.v6.stage.BaseStageTest;
-    import org.hyperskill.hstest.v6.testcase.CheckResult;
-    import org.hyperskill.hstest.v6.testcase.TestCase;
+    import org.hyperskill.hstest.stage.StageTest;
+    import org.hyperskill.hstest.testcase.CheckResult;
+    import org.hyperskill.hstest.testcase.TestCase;
     import org.junit.BeforeClass;
 
     import java.util.List;
 
-    public class MainTest extends BaseStageTest<Clue> {
+    public class MainTest extends StageTest<Clue> {
         static String largeContent;
 
         String pdf = "PDF document";
@@ -103,27 +103,27 @@ files:
             reply = reply.strip();
 
             if (reply.contains(doc) && reply.contains(pdf)) {
-                return CheckResult.FALSE("There are both \"" + doc + "\" and \"" + pdf + "\"" +
+                return CheckResult.wrong("There are both \"" + doc + "\" and \"" + pdf + "\"" +
                     " in output, should be only one of them");
             } else if (reply.contains(doc) && reply.contains(unknown)) {
-                return CheckResult.FALSE("There are both \"" + doc + "\" and \"" + unknown + "\"" +
+                return CheckResult.wrong("There are both \"" + doc + "\" and \"" + unknown + "\"" +
                     " in output, should be only one of them");
             } else if (reply.contains(pdf) && reply.contains(unknown)) {
-                return CheckResult.FALSE("There are both \"" + pdf + "\" and \"" + unknown + "\"" +
+                return CheckResult.wrong("There are both \"" + pdf + "\" and \"" + unknown + "\"" +
                     " in output, should be only one of them");
             }
 
             if (!reply.contains(clue.response)) {
-                return CheckResult.FALSE("Your output does not contain \"" + clue.response + "\", but should." +
+                return CheckResult.wrong("Your output does not contain \"" + clue.response + "\", but should." +
                     "\n\nYour output:\n" + reply);
             }
 
             if (!reply.contains("seconds")) {
-                return CheckResult.FALSE("Your output does not contain \"seconds\", but should." +
+                return CheckResult.wrong("Your output does not contain \"seconds\", but should." +
                     "\n\nYour output:\n" + reply);
             }
 
-            return CheckResult.TRUE;
+            return CheckResult.correct();
         }
 
         @BeforeClass

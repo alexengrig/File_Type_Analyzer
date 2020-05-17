@@ -6,9 +6,9 @@ files:
   text: |2
 
     import analyzer.Main;
-    import org.hyperskill.hstest.v6.stage.BaseStageTest;
-    import org.hyperskill.hstest.v6.testcase.CheckResult;
-    import org.hyperskill.hstest.v6.testcase.TestCase;
+    import org.hyperskill.hstest.stage.StageTest;
+    import org.hyperskill.hstest.testcase.CheckResult;
+    import org.hyperskill.hstest.testcase.TestCase;
     import org.junit.AfterClass;
     import org.junit.Assert;
     import org.junit.BeforeClass;
@@ -20,7 +20,7 @@ files:
     import java.nio.file.Paths;
     import java.util.List;
 
-    public class MainTest extends BaseStageTest<Clue> {
+    public class MainTest extends StageTest<Clue> {
         private static final String CURRENT_DIR = System.getProperty("user.dir") + File.separator;
 
         private static String testFolder = "test_files";
@@ -223,20 +223,20 @@ files:
             String actual = reply.strip();
 
             if (!actual.contains(clue.first)) {
-                return CheckResult.FALSE(
+                return CheckResult.wrong(
                     clue.feedback + "\n\n" +
                         "Cannot find a line " + clue.first + "\nYour output:\n" + actual
                 );
             }
 
             if (!actual.contains(clue.second)) {
-                return CheckResult.FALSE(
+                return CheckResult.wrong(
                     clue.feedback + "\n\n" +
                         "Cannot find a line " + clue.second + "\nYour output:\n" + actual
                 );
             }
 
-            return CheckResult.TRUE;
+            return CheckResult.correct();
         }
 
         @BeforeClass

@@ -10,12 +10,12 @@
 
 <h2>Output example</h2>
 
-<pre><code class="language-no-highlight">java Main "-----BEGIN\ CERTIFICATE-----" "PEM certificate" test_files
+<pre><code class="language-no-highlight">java Main test_files "-----BEGIN\ CERTIFICATE-----" "PEM certificate"
 file.pem: PEM certificate
 doc_1.docx: Unknown file type
 doc_2.pdf: Unknown file type</code></pre>
 
-<pre><code class="language-no-highlight">java Main "%PDF-" "PDF document" test_files
+<pre><code class="language-no-highlight">java Main test_files "%PDF-" "PDF document"
 file.pem: Unknown file type
 doc_1.docx: Unknown file type
 doc_2.pdf: PDF document</code></pre>
