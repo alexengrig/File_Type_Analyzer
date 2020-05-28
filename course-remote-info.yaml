@@ -26,8 +26,6 @@ topics:
     theory_id: 8739
   - title: What are streams
     theory_id: 5533
-  - title: Input streams
-    theory_id: 9723
   - title: What is an exception
     theory_id: 3497
   - title: Hierarchy of exceptions
@@ -44,6 +42,8 @@ topics:
     theory_id: 3636
   - title: Writing files
     theory_id: 3652
+  - title: Input streams
+    theory_id: 9723
   - title: Introduction to Java
     theory_id: 3500
   - title: Basic literals
