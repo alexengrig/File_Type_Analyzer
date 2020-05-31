@@ -65,46 +65,73 @@ class HashMultiset<E> implements Multiset<E> {
 
     @Override
     public void add(E elem) {
-        // implement the method
+        if (map.containsKey(elem)) {
+            map.put(elem, map.get(elem) + 1);
+        } else {
+            map.put(elem, 1);
+        }
     }
 
     @Override
     public void remove(E elem) {
-        // implement the method
+        if (map.containsKey(elem)) {
+            if (map.get(elem) == 1) {
+                map.remove(elem);
+            } else {
+                map.put(elem, map.get(elem) - 1);
+            }
+        }
     }
 
     @Override
     public void union(Multiset<E> other) {
-        // implement the method
+        for (E elem : other.toSet()) {
+            if (map.containsKey(elem)) {
+                map.put(elem, Math.max(map.get(elem), other.getMultiplicity(elem)));
+            } else {
+                map.put(elem, other.getMultiplicity(elem));
+            }
+        }
     }
 
     @Override
     public void intersect(Multiset<E> other) {
-        // implement the method
+        for (E elem : other.toSet()) {
+            if (map.containsKey(elem)) {
+                map.put(elem, Math.min(map.get(elem), other.getMultiplicity(elem)));
+            } else {
+                map.remove(elem);
+            }
+        }
+        for (E elem : toSet()) {
+            if (!other.contains(elem)) {
+                map.remove(elem);
+            }
+        }
     }
 
     @Override
     public int getMultiplicity(E elem) {
-        // implement the method
-        return 0;
+        return map.getOrDefault(elem, 0);
     }
 
     @Override
     public boolean contains(E elem) {
-        // implement the method
-        return false;
+        return map.containsKey(elem);
     }
 
     @Override
     public int numberOfUniqueElements() {
-        // implement the method
-        return 0;
+        return map.size();
     }
 
     @Override
     public int size() {
-        // implement the method
-        return 0;
+        int sum = 0;
+        for (Integer value : map.values()) {
+            sum += value;
+        }
+        return sum;
     }
 
     @Override
