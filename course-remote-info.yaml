@@ -202,14 +202,14 @@ topics:
     theory_id: 4882
   - title: Interruptions
     theory_id: 4881
-  - title: Executors
-    theory_id: 4895
   - title: Generic programming
     theory_id: 3492
   - title: Generics and Object
     theory_id: 3493
   - title: Functional interfaces and lambda expressions
     theory_id: 3601
+  - title: Executors
+    theory_id: 4895
   - title: What are collections
     theory_id: 3770
   - title: ArrayList
