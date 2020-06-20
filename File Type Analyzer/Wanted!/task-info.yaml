@@ -26,7 +26,6 @@ files:
     import org.hyperskill.hstest.testcase.CheckResult;
     import org.hyperskill.hstest.testcase.TestCase;
     import org.junit.AfterClass;
-    import org.junit.Assert;
     import org.junit.BeforeClass;
 
     import java.io.File;
@@ -120,23 +119,31 @@ files:
                                 "\nThe executor.invokeAll() method might help. Also, don't forget to call .shutdown()."
                 );
             }
+
             startedThreadCount = (int) currentThreads;
-            String actual = reply.strip();
-            if (actual.isEmpty()) {
-                actual = "No output (check if you exited " +
-                        "from main too early, you should wait until all threads are finishes)";
-            }
 
             String[] expectedLines = clue.output.split("\n");
+            String actual = reply.strip();
+
+            if (actual.isEmpty()) {
+                return CheckResult.wrong("No output (check if you exited " +
+                        "from main too early, you should wait until all threads are finishes)");
+            }
+
+            int expectedLinesLength = expectedLines.length;
+
+            if (actual.trim().split("\n").length != expectedLines.length) {
+                return CheckResult.wrong(String.format("There is should be %d lines in the output when you check %d files!\nMake sure you don't print empty lines.", expectedLinesLength, expectedLinesLength));
+            }
 
             for (String expectedLine : expectedLines) {
-                if (!actual.contains(expectedLine)) {
+                if (!actual.toLowerCase().contains(expectedLine.toLowerCase())) {
                     return new CheckResult(false, "Can't find the line '"
                             + expectedLine + "' in the output!");
                 }
             }
 
-            return new CheckResult(true);
+            return CheckResult.correct();
         }
 
         @BeforeClass
